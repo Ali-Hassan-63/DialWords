@@ -1,4 +1,4 @@
-# Phone Word Generator  
+# TelePhone number Word Generator  
 
 ## Overview  
 The **Phone Word Generator** is a C++ program that generates all possible word combinations for a 7-digit phone number based on the traditional telephone keypad mapping. This tool is perfect for exploring mnemonic or creative word representations of phone numbers, commonly used for marketing and memory aids.  
