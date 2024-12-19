@@ -1,18 +1,13 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include <cstdlib>
-#include <ctime>
-
 using namespace std;
-
 class LetterMapper {
 private:
     const char* letterMapping[10] = { " ", " ", "ABC", "DEF", "GHI", "JKL", "MNO", "PRS", "TUV", "WXY" };
 
 public:
     LetterMapper() {}
-
     // Returns letters corresponding to the digit
     const char* getLetters(char digit) const {
         if (digit < '2' || digit > '9') {
@@ -21,7 +16,6 @@ public:
         return letterMapping[digit - '0'];
     }
 };
-
 class PhoneNumber {
 private:
     string number;
@@ -47,24 +41,37 @@ public:
     string getNumber() const {
         return number;
     }
-
     // Generates word combinations for the number
     void generateCombinations(const LetterMapper& mapper, ofstream& outputFile) const {
-        string combination(7, ' ');
-        generateCombinationsRecursive(mapper, 0, combination, outputFile);
-    }
-
-private:
-    // Recursively generates combinations
-    void generateCombinationsRecursive(const LetterMapper& mapper, int index, string& combination, ofstream& outputFile) const {
-        if (index == 7) {
-            outputFile << combination << endl;
-            return;
+        const char* letters[7];  // Array to store the possible letters for each digit
+        for (int i = 0; i < 7; ++i) {
+            letters[i] = mapper.getLetters(number[i]);  // Store the corresponding letter set for each digit
         }
-        const char* letters = mapper.getLetters(number[index]);
-        for (int i = 0; letters[i] != '\0'; ++i) {
-            combination[index] = letters[i];
-            generateCombinationsRecursive(mapper, index + 1, combination, outputFile);
+        int indices[7] = { 0 };  // Array to track the current index for each letter set
+        while (true) {
+            // Build the current combination based on the current indices
+            string combination;
+            for (int i = 0; i < 7; ++i) {
+                combination += letters[i][indices[i]];  // Get the current letter for each digit
+            }
+
+            // Write the combination to the output file
+            outputFile << combination << endl;
+
+            // Increment indices to generate the next combination
+            int position = 6;  // Start from the last digit
+            while (position >= 0) {
+                indices[position]++;  // Move to the next letter for the current digit
+                if (indices[position] < strlen(letters[position])) {  // If within the bounds of the current letter set
+                    break;
+                }
+                indices[position] = 0;  // Reset the current digit to the first letter in the set
+                position--;  // Move to the previous digit
+            }
+            // If we've carried over past the first digit, we're done
+            if (position < 0) {
+                break;
+            }
         }
     }
 };
