@@ -81,8 +81,6 @@ int main() {
         string inputNumber;
         cout << "Enter phone number (7 digits, no 0's or 1's): ";
         cin >> inputNumber;
-        inputNumber.erase(remove(inputNumber.begin(), inputNumber.end(), '-'), inputNumber.end());
-
         PhoneNumber phoneNumber(inputNumber);  // Validate phone number
         LetterMapper mapper;
 
