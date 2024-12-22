@@ -25,9 +25,9 @@ private:
         if (number.size() != 7) {
             throw invalid_argument("Phone number must be 7 digits.");
         }
-        for (char digit : number) {
-            if (digit == '0' || digit == '1') {
-                throw invalid_argument("Phone number can't contain 0's or 1's.");
+         for (int i = 0; i < 7; ++i) { 
+           if (number[i] == '0' || number[i] == '1') { 
+                throw invalid_argument("Phone number can't contain 0's or 1's."); 
             }
         }
     }
