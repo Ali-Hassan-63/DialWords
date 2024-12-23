@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include <cstring> 
 using namespace std;
 class LetterMapper {
 private:
