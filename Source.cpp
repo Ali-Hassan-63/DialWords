@@ -5,7 +5,6 @@ using namespace std;
 class LetterMapper {
 private:
     const char* letterMapping[10] = { " ", " ", "ABC", "DEF", "GHI", "JKL", "MNO", "PRS", "TUV", "WXY" };
-
 public:
     LetterMapper() {}
     // Returns letters corresponding to the digit
@@ -19,7 +18,6 @@ public:
 class PhoneNumber {
 private:
     string number;
-
     // Ensures the phone number is valid
     void validate() {
         if (number.size() != 7) {
@@ -31,13 +29,11 @@ private:
             }
         }
     }
-
 public:
     // Constructor validates the number
     PhoneNumber(const string& num) : number(num) {
         validate();
     }
-
     string getNumber() const {
         return number;
     }
@@ -54,10 +50,8 @@ public:
             for (int i = 0; i < 7; ++i) {
                 combination += letters[i][indices[i]];  // Get the current letter for each digit
             }
-
             // Write the combination to the output file
             outputFile << combination << endl;
-
             // Increment indices to generate the next combination
             int position = 6;  // Start from the last digit
             while (position >= 0) {
@@ -75,7 +69,6 @@ public:
         }
     }
 };
-
 int main() {
     try {
         string inputNumber;
@@ -83,24 +76,20 @@ int main() {
         cin >> inputNumber;
         PhoneNumber phoneNumber(inputNumber);  // Validate phone number
         LetterMapper mapper;
-
         ofstream outputFile("word_combinations.txt");  // Output file for word combos
         if (!outputFile) {
             cerr << "Error: Could not open file for writing." << endl;
             return 1;
         }
-
         outputFile << "Entered: " << phoneNumber.getNumber() << endl;
         outputFile << "Generating combinations: " << endl;
         phoneNumber.generateCombinations(mapper, outputFile);  // Generate and save combinations
 
         outputFile.close();
         cout << "Combinations saved to word_combinations.txt" << endl;
-
     }
     catch (const exception& ex) {
         cerr << "Error: " << ex.what() << endl;
     }
-
     return 0;
 }
