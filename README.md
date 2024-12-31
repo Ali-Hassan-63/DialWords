@@ -16,7 +16,7 @@ The **Phone Word Generator** is a C++ program that generates all possible word c
   - `7` → `PRS`  
   - `8` → `TUV`  
   - `9` → `WXY`  
-- Recursively generates all possible letter combinations for the phone number.  
+- Iteratively generates all possible letter combinations for the phone number.  
 - Saves the results to a file named `word_combinations.txt`.  
 
 ---
